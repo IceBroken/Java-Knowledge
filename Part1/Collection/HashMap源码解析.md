@@ -1,6 +1,6 @@
 ## HashMap源码详解 (JAVA 7)
 ### put 过程解析
-```
+```java
 public V put(K key, V value) {
         // 当插入第一个元素的时候，需要先初始化数组大小
         if (table == EMPTY_TABLE) {
@@ -32,7 +32,7 @@ public V put(K key, V value) {
 ```
 
 初始化数组
-```
+```java
 private void inflateTable(int toSize) {
         // Find a power of 2 >= toSize
         // 保证数组大小一定是 2 的 n 次方。
@@ -48,7 +48,7 @@ private void inflateTable(int toSize) {
 ```
 
 计算具体数组位置
-```
+```java
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
         return h & (length-1);
@@ -56,7 +56,7 @@ private void inflateTable(int toSize) {
 ```
 
 添加节点到链表中
-```
+```java
 void addEntry(int hash, K key, V value, int bucketIndex) {
         // 如果当前 HashMap 大小已经达到了阈值，并且新值要插入的数组位置已经有元素了，那么要扩容
         if ((size >= threshold) && (null != table[bucketIndex])) {
@@ -74,7 +74,7 @@ void addEntry(int hash, K key, V value, int bucketIndex) {
 ```
 
 将新值放到链表的表头
-```
+```java
 void createEntry(int hash, K key, V value, int bucketIndex) {
         Entry<K,V> e = table[bucketIndex];
         table[bucketIndex] = new Entry<>(hash, key, value, e);
@@ -83,7 +83,7 @@ void createEntry(int hash, K key, V value, int bucketIndex) {
 ```
 
 数组扩容
-```
+```java
 void resize(int newCapacity) {
         Entry[] oldTable = table;
         int oldCapacity = oldTable.length;
@@ -104,7 +104,7 @@ void resize(int newCapacity) {
 
 ### get 过程解析
 
-```
+```java
 public V get(Object key) {
         //key 为 null 的话，会被放到 table[0]，所以只要遍历下 table[0] 处的链表就可以了
         if (key == null)
@@ -115,7 +115,7 @@ public V get(Object key) {
     }
 ```
 
-```
+```java
 final Entry<K,V> getEntry(Object key) {
         if (size == 0) {
             return null;
