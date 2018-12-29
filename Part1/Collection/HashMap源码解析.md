@@ -1,5 +1,7 @@
-## HashMap源码详解 (JAVA 7)
-### put 过程解析
+## HashMap源码详解 
+### Java 7
+#### put 过程解析
+
 ```java
 public V put(K key, V value) {
         // 当插入第一个元素的时候，需要先初始化数组大小
@@ -32,6 +34,7 @@ public V put(K key, V value) {
 ```
 
 初始化数组
+
 ```java
 private void inflateTable(int toSize) {
         // Find a power of 2 >= toSize
@@ -48,6 +51,7 @@ private void inflateTable(int toSize) {
 ```
 
 计算具体数组位置
+
 ```java
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
@@ -56,6 +60,7 @@ private void inflateTable(int toSize) {
 ```
 
 添加节点到链表中
+
 ```java
 void addEntry(int hash, K key, V value, int bucketIndex) {
         // 如果当前 HashMap 大小已经达到了阈值，并且新值要插入的数组位置已经有元素了，那么要扩容
@@ -74,6 +79,7 @@ void addEntry(int hash, K key, V value, int bucketIndex) {
 ```
 
 将新值放到链表的表头
+
 ```java
 void createEntry(int hash, K key, V value, int bucketIndex) {
         Entry<K,V> e = table[bucketIndex];
@@ -83,6 +89,7 @@ void createEntry(int hash, K key, V value, int bucketIndex) {
 ```
 
 数组扩容
+
 ```java
 void resize(int newCapacity) {
         Entry[] oldTable = table;
@@ -102,7 +109,7 @@ void resize(int newCapacity) {
 ```
 
 
-### get 过程解析
+#### get 过程解析
 
 ```java
 public V get(Object key) {
@@ -134,3 +141,8 @@ final Entry<K,V> getEntry(Object key) {
         return null;
     }
 ```
+
+
+### Java 8
+
+#### put 过程解析
