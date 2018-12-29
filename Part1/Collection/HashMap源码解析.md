@@ -1,4 +1,4 @@
-## Java 7
+## HashMap源码详解 (JAVA 7)
 ### put 过程解析
 ```
 public V put(K key, V value) {
@@ -102,7 +102,7 @@ void resize(int newCapacity) {
 ```
 
 
-###get 过程解析
+### get 过程解析
 
 ```
 public V get(Object key) {
